@@ -83,10 +83,11 @@ function App() {
           loop 
           muted 
           playsInline 
+          poster="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000"
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
           <source 
-            src="https://player.vimeo.com/external/435674703.sd.mp4?s=7f3a1ff34d5b94e33cf74d28cf1f8cd536e2f183&profile_id=164&oauth2_token_id=57447761" 
+            src="https://videos.pexels.com/video-files/855029/855029-sd_640_360_30p.mp4" 
             type="video/mp4" 
           />
           Your browser does not support the video tag.
