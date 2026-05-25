@@ -75,12 +75,27 @@ function App() {
       {/* Hero Section */}
       <section 
         id="inicio" 
-        className="relative min-h-[90vh] flex items-center pt-20 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: `linear-gradient(to bottom, rgba(240, 244, 248, 0.6), rgba(240, 244, 248, 0.95)), url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format&fit=crop')` 
-        }}
+        className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        {/* Background Video Loop */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source 
+            src="https://player.vimeo.com/external/435674703.sd.mp4?s=7f3a1ff34d5b94e33cf74d28cf1f8cd536e2f183&profile_id=164&oauth2_token_id=57447761" 
+            type="video/mp4" 
+          />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Dark Forest Overlay */}
+        <div className="absolute inset-0 bg-[#040e09]/75 z-10"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20">
           <div className="max-w-2xl">
             <span className="text-white uppercase font-display font-extrabold text-xs tracking-widest block mb-3 bg-sky-600 px-4 py-1.5 rounded-full max-w-max shadow-md">
               🌊 Naturaleza, Lagos & Volcanes
@@ -88,12 +103,12 @@ function App() {
             <img 
               src={logoHero} 
               alt="Molco Aventura" 
-              className="max-w-[280px] sm:max-w-[420px] h-auto object-contain mb-6 drop-shadow-md" 
+              className="max-w-[280px] sm:max-w-[420px] h-auto object-contain mb-6 drop-shadow-md brightness-110" 
             />
-            <div className="text-2xl sm:text-3xl font-display font-extrabold text-[#ea580c] mb-6">
+            <div className="text-2xl sm:text-3xl font-display font-extrabold text-[#ff7a47] mb-6">
               Región de la Araucanía – Región de los Ríos
             </div>
-            <p className="text-[#1e3a52] text-lg font-bold mb-8 leading-relaxed">
+            <p className="text-sky-100/90 text-lg font-semibold mb-8 leading-relaxed">
               Nace de un sueño familiar para conectarte con paisajes incomparables, majestuosos volcanes, lagos mágicos y bosques nativos de nuestro querido Chile.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -101,7 +116,7 @@ function App() {
                 href="https://wa.me/56986128398" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="inline-flex items-center justify-center bg-sky-600 text-white font-display font-extrabold px-8 py-4 rounded-full shadow-lg shadow-sky-600/30 hover:bg-sky-700 hover:scale-[1.02] transition"
+                className="inline-flex items-center justify-center bg-[#ea580c] hover:bg-orange-600 text-white font-display font-extrabold px-8 py-4 rounded-full shadow-lg shadow-orange-600/30 hover:scale-[1.02] transition"
               >
                 <svg className="w-5 h-5 mr-2 fill-current" viewBox="0 0 24 24">
                   <path d="M12.012 2.25c-5.306 0-9.695 4.384-9.695 9.696 0 1.954.586 3.778 1.597 5.31l-1.047 3.824 3.93-1.03a9.625 9.625 0 0 0 5.215 1.51c5.307 0 9.696-4.388 9.696-9.697 0-5.312-4.389-9.695-9.696-9.695zm5.666 13.729c-.244.686-1.21 1.249-1.66 1.3-1.2.137-2.735-.37-4.004-1.39-1.272-1.023-2.072-2.316-2.529-3.238-.456-.922-.446-1.572.01-2.03.354-.356.467-.442.627-.66.16-.217.12-.403.04-.59-.08-.186-.627-1.512-.86-2.068-.226-.54-.46-.467-.627-.476l-.534-.01c-.187 0-.494.07-.75.353-.258.283-.984.965-.984 2.353s1.008 2.73 1.15 2.923c.14.193 1.986 3.033 4.81 4.25.672.29 1.197.463 1.606.593.675.215 1.289.185 1.774.113.54-.08 1.66-.68 1.895-1.336.236-.656.236-1.22.166-1.336-.07-.116-.258-.186-.54-.326l-2.55-1.258c-.282-.14-.488-.113-.695.196l-.888 1.144c-.162.21-.326.236-.607.095-.28-.14-1.185-.436-2.257-1.393-.834-.744-1.397-1.662-1.56-1.943-.162-.28-.016-.432.124-.572.126-.126.28-.327.42-.49.14-.163.187-.28.28-.466.094-.186.047-.35-.023-.49-.07-.14-.627-1.512-.86-2.068z"/>
@@ -110,7 +125,7 @@ function App() {
               </a>
               <a 
                 href="#itinerario" 
-                className="inline-flex items-center justify-center border-2 border-emerald-600 text-emerald-700 bg-white font-display font-extrabold px-8 py-4 rounded-full hover:bg-emerald-600 hover:text-white transition shadow-md"
+                className="inline-flex items-center justify-center border-2 border-white text-white font-display font-extrabold px-8 py-4 rounded-full hover:bg-white hover:text-sky-950 transition shadow-md"
               >
                 Ver Itinerarios
               </a>
