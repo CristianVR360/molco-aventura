@@ -3,6 +3,15 @@ import logoFull from './assets/logos/full.png';
 import logoLetters from './assets/logos/solo-letras.png';
 import logoHero from './assets/logos/molco-aventura-sinfondo.png';
 
+// Local Photo Imports
+import fotoDeporteLago from './assets/fotos/deporte lago.jpg.jpeg';
+import fotoHuiloHuilo from './assets/fotos/huilo-huilo.jpg.jpeg';
+import fotoMotoAgua from './assets/fotos/moto-de-agua.jpg.jpeg';
+import fotoNiebla from './assets/fotos/niebla.jpg.jpeg';
+import fotoPuertoFuy from './assets/fotos/puerto fuy.jpg.jpeg';
+import fotoValdivia from './assets/fotos/valdivia.jpg.jpeg';
+import fotoVolcanVillarrica from './assets/fotos/volcan-villarrica.jpg.jpeg';
+
 function App() {
   const [activeTab, setActiveTab] = useState('dia2');
 
@@ -11,7 +20,7 @@ function App() {
       title: 'Full Day Tours Valdivia',
       tagline: 'Aventura en la Ciudad de los Ríos',
       description: 'Tour guiado a la aventura de Valdivia en la ciudad de los Ríos. Incluye 1 salida Full Day a Valdivia, Niebla (visita Fuerte Niebla), Cervecería Kunstmann, Centro de Valdivia (Feria Fluvial de Valdivia, Centro de Valdivia), Río Valdivia.',
-      image: 'https://images.unsplash.com/photo-1599818817757-d64e52514bc2?q=80&w=600&auto=format&fit=crop',
+      image: fotoValdivia,
       highlights: [
         { num: 1, title: 'Fuerte de Niebla', desc: 'Visita guiada a las fortificaciones coloniales con vista al Océano Pacífico.' },
         { num: 2, title: 'Cervecería Kunstmann', desc: 'Degustación y almuerzo en la emblemática casa cervecera tradicional del sur.' },
@@ -22,7 +31,7 @@ function App() {
       title: 'Full Day Panguipulli - Pto. Fuy',
       tagline: 'La Ruta de los Siete Lagos',
       description: 'Tour guiado a la aventura por La Araucanía en la ciudad de los lagos. Incluye 1 salida Full Day hacia Panguipulli, Reserva Biológica Huilo Huilo, Puerto Fuy. Esta aventura incluye entrada a Parque Huilo Huilo (Pack Colibrí) y Barcaza Puerto Fuy – Puerto Pirehueico.',
-      image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop',
+      image: fotoPuertoFuy,
       highlights: [
         { num: 1, title: 'Reserva Huilo Huilo (Pack Colibrí)', desc: 'Sendero interactivo entre caídas de agua y la selva patagónica húmeda.' },
         { num: 2, title: 'Puerto Fuy', desc: 'Puerto de montaña con hermosas vistas al imponente lago Pirehueico.' },
@@ -33,7 +42,7 @@ function App() {
       title: 'Full Day Deporte Náutico',
       tagline: 'Adrenalina en el Lago Villarrica',
       description: 'Salida en embarcación al lago Villarrica desde Playa Linda o Playa Molco en lancha para 6 personas, donde realizaremos actividades de entretención náutica en arrastrable (Saca Chu) para 2 personas, disfrutar de SUP por 2 horas y disfrutar de una forma diferente del lago.',
-      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop',
+      image: fotoDeporteLago,
       highlights: [
         { num: 1, title: 'Paseo en Lancha Exclusiva', desc: 'Navegación en lancha para un grupo reducido de 6 aventureros.' },
         { num: 2, title: 'Arrastrable "Saca Chu"', desc: 'Diversión y adrenalina pura para 2 personas desafiando las olas del lago.' },
@@ -83,7 +92,7 @@ function App() {
           loop 
           muted 
           playsInline 
-          poster="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000"
+          poster={fotoVolcanVillarrica}
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
           <source 
@@ -216,10 +225,10 @@ function App() {
           <h3 className="text-xl font-display font-bold text-sky-950 mb-6">Galería de Experiencias (Fotos y Videos)</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { title: 'Volcán Ruka Pillañ', url: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=600&auto=format&fit=crop' },
-              { title: 'Niebla y Ríos', url: 'https://images.unsplash.com/photo-1508873696983-2df519f0397e?q=80&w=600&auto=format&fit=crop' },
-              { title: 'Reserva Huilo Huilo', url: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=600&auto=format&fit=crop' },
-              { title: 'Lagos y Deportes', url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=600&auto=format&fit=crop' }
+              { title: 'Volcán Ruka Pillañ', url: fotoVolcanVillarrica },
+              { title: 'Niebla y Ríos', url: fotoNiebla },
+              { title: 'Reserva Huilo Huilo', url: fotoHuiloHuilo },
+              { title: 'Lagos y Deportes', url: fotoMotoAgua }
             ].map((img, i) => (
               <div key={i} className="group relative rounded-xl overflow-hidden aspect-[4/3] cursor-pointer shadow-md hover:shadow-xl transition">
                 <img 
