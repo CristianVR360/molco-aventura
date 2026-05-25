@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import logoFull from './assets/logos/full.png';
 import logoLetters from './assets/logos/solo-letras.png';
+import logoHero from './assets/logos/molco-aventura-sinfondo.png';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dia2');
@@ -52,9 +53,6 @@ function App() {
               alt="Molco Aventura Logo" 
               className="h-12 w-auto object-contain" 
             />
-            <span className="font-display font-extrabold text-xl tracking-wider text-sky-900 hidden sm:inline">
-              MOLCO<span className="text-[#ea580c]">AVENTURA</span>
-            </span>
           </div>
           <nav className="hidden md:flex items-center gap-8">
             <a href="#inicio" className="font-display font-extrabold text-sm text-sky-900 hover:text-sky-600 transition">Inicio</a>
@@ -87,9 +85,11 @@ function App() {
             <span className="text-white uppercase font-display font-extrabold text-xs tracking-widest block mb-3 bg-sky-600 px-4 py-1.5 rounded-full max-w-max shadow-md">
               🌊 Naturaleza, Lagos & Volcanes
             </span>
-            <h1 className="text-5xl sm:text-7xl font-display font-extrabold tracking-tight mb-4 text-sky-950">
-              MOLCO AVENTURA
-            </h1>
+            <img 
+              src={logoHero} 
+              alt="Molco Aventura" 
+              className="max-w-[280px] sm:max-w-[420px] h-auto object-contain mb-6 drop-shadow-md" 
+            />
             <div className="text-2xl sm:text-3xl font-display font-extrabold text-[#ea580c] mb-6">
               Región de la Araucanía – Región de los Ríos
             </div>
