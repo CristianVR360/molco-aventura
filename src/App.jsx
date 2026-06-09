@@ -123,17 +123,19 @@ function App() {
             />
           </div>
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setTheme(theme === 'theme-a' ? 'theme-b' : 'theme-a')} 
-              className="flex items-center gap-2 px-3.5 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary-light transition font-display font-extrabold text-xs shadow-sm cursor-pointer hover:scale-[1.02] duration-200"
-              aria-label="Cambiar tema"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
-              </span>
-              {theme === 'theme-a' ? 'Identidad A' : 'Identidad B'}
-            </button>
+            <div className="flex items-center gap-2">
+              <span className={`text-[10px] sm:text-xs font-display font-extrabold transition-colors duration-200 ${theme === 'theme-a' ? 'text-primary' : 'text-slate-400'}`}>Identidad A</span>
+              <button 
+                onClick={() => setTheme(theme === 'theme-a' ? 'theme-b' : 'theme-a')} 
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${theme === 'theme-b' ? 'bg-secondary' : 'bg-primary'}`}
+                aria-label="Cambiar tema de identidad"
+              >
+                <span 
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${theme === 'theme-b' ? 'translate-x-5' : 'translate-x-0'}`} 
+                />
+              </button>
+              <span className={`text-[10px] sm:text-xs font-display font-extrabold transition-colors duration-200 ${theme === 'theme-b' ? 'text-secondary-dark' : 'text-slate-400'}`}>Identidad B</span>
+            </div>
             <nav className="hidden md:flex items-center gap-8">
               <a href="#inicio" className="font-display font-extrabold text-sm text-primary-dark hover:text-primary transition">Inicio</a>
               <a href="#conocenos" className="font-display font-extrabold text-sm text-primary-dark hover:text-primary transition">Conócenos</a>
@@ -492,28 +494,19 @@ function App() {
                 Camping: Carpa para 4 personas, baño privado, (saco de dormir es responsabilidad de cada persona).
               </p>
               
-              <div className="border-y border-slate-100 py-4 mb-4 flex flex-col gap-2">
-                <div className="flex justify-between items-center px-2">
-                  <span className="text-slate-600 text-sm font-bold">Valor Adulto</span>
-                  <span className="text-primary font-display font-black text-xl">$459.000.-</span>
-                </div>
-                <div className="flex justify-between items-center px-2 border-t border-slate-50 pt-2">
-                  <span className="text-slate-600 text-sm font-bold">Valor Niño (hasta 5 años)</span>
-                  <span className="text-primary font-display font-black text-lg">$259.000.-</span>
-                </div>
+              <div className="border-y border-slate-100 py-6 mb-6 flex flex-col items-center justify-center">
+                <span className="text-secondary font-display font-black text-xl tracking-wide uppercase">Consultar Precios</span>
+                <span className="text-slate-500 text-xs mt-1 font-semibold">Tarifas personalizadas según temporada</span>
               </div>
 
               <a 
-                href="https://wa.me/56929471838?text=Hola,%20me%20interesa%20la%20opcion%20Camping%206%20noches" 
+                href="https://wa.me/56929471838?text=Hola,%20me%20interesa%20consultar%20precios%20y%20disponibilidad%20para%20la%20opcion%20Camping%206%20noches" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-full py-3.5 bg-primary hover:bg-primary-hover text-white rounded-full font-display font-bold shadow-md shadow-primary/10 transition block mb-4"
+                className="w-full py-3.5 bg-primary hover:bg-primary-hover text-white rounded-full font-display font-bold shadow-md shadow-primary/10 transition block"
               >
-                Reservar Camping
+                Consultar Tarifas
               </a>
-              <span className="text-[10px] text-slate-500 bg-slate-100 py-1 px-3.5 rounded inline-block self-center font-bold">
-                (Valores referencial no confirmado)
-              </span>
             </div>
 
             {/* Card 2: Refugio */}
@@ -524,28 +517,19 @@ function App() {
                 Refugio: Espacio para 3 personas equipado.
               </p>
               
-              <div className="border-y border-slate-100 py-4 mb-4 flex flex-col gap-2">
-                <div className="flex justify-between items-center px-2">
-                  <span className="text-slate-600 text-sm font-bold">Valor Adulto</span>
-                  <span className="text-primary font-display font-black text-xl">$659.000.-</span>
-                </div>
-                <div className="flex justify-between items-center px-2 border-t border-slate-50 pt-2">
-                  <span className="text-slate-600 text-sm font-bold">Valor Niño (hasta 5 años)</span>
-                  <span className="text-primary font-display font-black text-lg">$259.000.-</span>
-                </div>
+              <div className="border-y border-slate-100 py-6 mb-6 flex flex-col items-center justify-center">
+                <span className="text-secondary font-display font-black text-xl tracking-wide uppercase">Consultar Precios</span>
+                <span className="text-slate-500 text-xs mt-1 font-semibold">Tarifas personalizadas según temporada</span>
               </div>
 
               <a 
-                href="https://wa.me/56929471838?text=Hola,%20me%20interesa%20la%20opcion%20Refugio%206%20noches" 
+                href="https://wa.me/56929471838?text=Hola,%20me%20interesa%20consultar%20precios%20y%20disponibilidad%20para%20la%20opcion%20Refugio%206%20noches" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-full py-3.5 bg-primary hover:bg-primary-hover text-white rounded-full font-display font-bold shadow-md shadow-primary/10 transition block mb-4"
+                className="w-full py-3.5 bg-primary hover:bg-primary-hover text-white rounded-full font-display font-bold shadow-md shadow-primary/10 transition block"
               >
-                Reservar Refugio
+                Consultar Tarifas
               </a>
-              <span className="text-[10px] text-slate-500 bg-slate-100 py-1 px-3.5 rounded inline-block self-center font-bold">
-                (Valor referencial no confirmado)
-              </span>
             </div>
 
             {/* Card 3: Cabaña (Destacada) */}
@@ -559,28 +543,19 @@ function App() {
                 Cabaña: Departamento para 4 o 5 personas equipado.
               </p>
               
-              <div className="border-y border-slate-100 py-4 mb-4 flex flex-col gap-2">
-                <div className="flex justify-between items-center px-2">
-                  <span className="text-slate-600 text-sm font-bold">Valor Adulto</span>
-                  <span className="text-primary font-display font-black text-xl">$759.000.-</span>
-                </div>
-                <div className="flex justify-between items-center px-2 border-t border-slate-50 pt-2">
-                  <span className="text-slate-600 text-sm font-bold">Valor Niño (hasta 5 años)</span>
-                  <span className="text-primary font-display font-black text-lg">$259.000.-</span>
-                </div>
+              <div className="border-y border-slate-100 py-6 mb-6 flex flex-col items-center justify-center">
+                <span className="text-secondary font-display font-black text-xl tracking-wide uppercase">Consultar Precios</span>
+                <span className="text-slate-500 text-xs mt-1 font-semibold">Tarifas personalizadas según temporada</span>
               </div>
 
               <a 
-                href="https://wa.me/56929471838?text=Hola,%20me%20interesa%20la%20opcion%20Cabana%206%20noches" 
+                href="https://wa.me/56929471838?text=Hola,%20me%20interesa%20consultar%20precios%20y%20disponibilidad%20para%20la%20opcion%20Cabana%206%20noches" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-full py-3.5 bg-secondary hover:bg-secondary-hover text-white rounded-full font-display font-bold shadow-md shadow-secondary/20 transition block mb-4"
+                className="w-full py-3.5 bg-secondary hover:bg-secondary-hover text-white rounded-full font-display font-bold shadow-md shadow-secondary/20 transition block"
               >
-                Reservar Cabaña
+                Consultar Tarifas
               </a>
-              <span className="text-[10px] text-primary bg-primary-light py-1 px-3.5 rounded inline-block self-center font-bold">
-                (Valores referencial no confirmado)
-              </span>
             </div>
           </div>
         </div>
@@ -602,7 +577,7 @@ function App() {
           <div className="bg-white rounded-2xl overflow-hidden border border-primary-medium/20 shadow-md hover:shadow-xl transition duration-300 flex flex-col">
             <div className="h-48 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1618083707368-b3823daa2726?q=80&w=800&auto=format&fit=crop" 
                 alt="Termas en el Sur de Chile" 
                 className="w-full h-full object-cover hover:scale-105 transition duration-500"
               />
