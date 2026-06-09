@@ -44,10 +44,10 @@ function App() {
       subtitle: 'Estadía de 6 noches a los pies de la imponente Ruka Pillañ con tinajas de aguas calientes de deshielo natural.',
     },
     {
-      image: fotoDeporteLago,
-      tag: '🚤 Deportes Náuticos',
-      title: 'AVENTURA Y ENTRETENCIÓN NÁUTICA',
-      subtitle: 'Salidas en lancha sobre el Lago Villarrica, Stand Up Paddle y el emocionante arrastrable Saca Chu.',
+      image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1200&auto=format&fit=crop',
+      tag: '⛺ Camping Aldea Molco',
+      title: 'CAMPING ALDEA MOLCO',
+      subtitle: 'Disfruta de una estadía de 6 noches rodeado de verdes bosques nativos, tinajas calientes y pozón natural.',
     },
     {
       image: fotoHuiloHuilo,
@@ -174,13 +174,11 @@ function App() {
                 idx === currentSlide ? 'scale-105' : 'scale-100'
               }`}
             />
-            {/* Dark Forest Overlay */}
-            <div className="absolute inset-0 bg-[#040e09]/75 z-10"></div>
           </div>
         ))}
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 mt-12">
-          <div className="max-w-3xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 mt-12 flex justify-start">
+          <div className="max-w-2xl bg-[#0f2537]/50 backdrop-blur-md border border-white/10 p-8 sm:p-12 rounded-3xl shadow-2xl">
             {/* Slide Text Content with dynamic key to trigger animation on change */}
             <div key={currentSlide} className="animate-fade-in-up duration-500">
               <span className="inline-flex items-center gap-1.5 text-white uppercase font-display font-extrabold text-xs tracking-widest mb-4 bg-primary px-4 py-1.5 rounded-full max-w-max shadow-md">
@@ -190,14 +188,14 @@ function App() {
               <img 
                 src={logoMainHero} 
                 alt="Molco Aventura" 
-                className="max-w-[220px] sm:max-w-[320px] h-auto object-contain mb-4 drop-shadow-md brightness-110" 
+                className="max-w-[280px] sm:max-w-[460px] w-full h-auto object-contain mb-6 drop-shadow-md brightness-110" 
               />
               
-              <h1 className="text-3xl sm:text-6xl font-display font-black text-white mb-4 leading-tight tracking-tight drop-shadow-lg">
+              <h1 className="text-3xl sm:text-5xl font-display font-black text-white mb-4 leading-tight tracking-tight drop-shadow-lg">
                 {slides[currentSlide].title}
               </h1>
               
-              <p className="text-white/90 text-lg sm:text-xl font-semibold mb-8 leading-relaxed max-w-2xl drop-shadow-md">
+              <p className="text-white/95 text-base sm:text-lg font-semibold mb-8 leading-relaxed drop-shadow-md">
                 {slides[currentSlide].subtitle}
               </p>
             </div>
@@ -666,7 +664,7 @@ function App() {
           <div className="bg-white rounded-2xl overflow-hidden border border-primary-medium/20 shadow-md hover:shadow-xl transition duration-300 flex flex-col">
             <div className="h-48 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=800&auto=format&fit=crop" 
                 alt="Centros de Esquí en Chile" 
                 className="w-full h-full object-cover hover:scale-105 transition duration-500"
               />
