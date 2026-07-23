@@ -78,7 +78,7 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const logoHeader = logoHorizontalColor;
+  const logoHeader = scrolled ? logoHorizontalColor : logoHorizontalWhite;
   const logoMainHero = logoHorizontalWhite;
   const logoFooter = logoHorizontalWhite;
 
@@ -164,28 +164,34 @@ function App() {
       <div className="noise-overlay" />
 
       {/* Header / Navigation */}
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'h-16 bg-bg-site/80 backdrop-blur-xl border-b border-card-border shadow-lg shadow-primary/5' 
-          : 'h-20 bg-bg-site/40 backdrop-blur-md border-b border-card-border/50'
+          ? 'h-16 bg-bg-site/90 backdrop-blur-xl border-b border-card-border shadow-lg shadow-primary/5' 
+          : 'h-20 bg-gradient-to-b from-black/70 via-black/30 to-transparent border-b border-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <img 
-              src={logoHeader} 
-              alt="Molco Aventura Logo" 
-              className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-9' : 'h-11'}`} 
-            />
+            <a href="#inicio" className="block focus:outline-none">
+              <img 
+                src={logoHeader} 
+                alt="Molco Aventura Logo" 
+                className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-9' : 'h-10 sm:h-11'}`} 
+              />
+            </a>
           </div>
           <div className="flex items-center gap-6">
             {/* Story-driven Custom Identity Selector */}
-            <div className="flex items-center bg-primary-light/60 border border-primary-medium/20 rounded-full p-1 shadow-inner relative z-10">
+            <div className={`flex items-center rounded-full p-1 shadow-inner relative z-10 transition-colors duration-300 ${
+              scrolled 
+                ? 'bg-primary-light/60 border border-primary-medium/20' 
+                : 'bg-black/30 border border-white/20 backdrop-blur-md'
+            }`}>
               <button 
                 onClick={() => setTheme('theme-a')} 
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-display font-extrabold transition-all duration-300 cursor-pointer ${
                   theme === 'theme-a' 
                     ? 'bg-primary text-white shadow-md scale-105' 
-                    : 'text-text-muted hover:text-primary'
+                    : scrolled ? 'text-text-muted hover:text-primary' : 'text-white/80 hover:text-white'
                 }`}
                 title="Identidad A: Volcán & Bosque"
               >
@@ -200,7 +206,7 @@ function App() {
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-display font-extrabold transition-all duration-300 cursor-pointer ${
                   theme === 'theme-b' 
                     ? 'bg-primary text-white shadow-md scale-105' 
-                    : 'text-text-muted hover:text-primary'
+                    : scrolled ? 'text-text-muted hover:text-primary' : 'text-white/80 hover:text-white'
                 }`}
                 title="Identidad B: Lagos & Ríos"
               >
@@ -213,17 +219,35 @@ function App() {
             </div>
             
             <nav className="hidden lg:flex items-center gap-6">
-              <a href="#inicio" className="font-display font-bold text-sm text-text-main hover:text-primary hover-underline-expand transition-colors py-1">Inicio</a>
-              <a href="#conocenos" className="font-display font-bold text-sm text-text-main hover:text-primary hover-underline-expand transition-colors py-1">Conócenos</a>
-              <a href="#servicios" className="font-display font-bold text-sm text-text-main hover:text-primary hover-underline-expand transition-colors py-1">Servicios</a>
-              <a href="#itinerario" className="font-display font-bold text-sm text-text-main hover:text-primary hover-underline-expand transition-colors py-1">Itinerario</a>
-              <a href="#tarifas" className="font-display font-bold text-sm text-text-main hover:text-primary hover-underline-expand transition-colors py-1">Tarifas</a>
-              <a href="#actividades" className="font-display font-bold text-sm text-text-main hover:text-primary hover-underline-expand transition-colors py-1">Actividades</a>
+              {[
+                { name: 'Inicio', href: '#inicio' },
+                { name: 'Conócenos', href: '#conocenos' },
+                { name: 'Servicios', href: '#servicios' },
+                { name: 'Itinerario', href: '#itinerario' },
+                { name: 'Tarifas', href: '#tarifas' },
+                { name: 'Actividades', href: '#actividades' },
+              ].map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={`font-display font-bold text-sm hover-underline-expand transition-colors py-1 ${
+                    scrolled 
+                      ? 'text-text-main hover:text-primary' 
+                      : 'text-white hover:text-secondary-light drop-shadow-sm'
+                  }`}
+                >
+                  {item.name}
+                </a>
+              ))}
               <a 
                 href="https://wa.me/56929471838" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="font-display font-extrabold text-sm border-2 border-primary text-primary hover:bg-primary hover:text-white px-5 py-2 rounded-full transition shadow-md active:scale-[0.98] active:translate-y-[1.5px]"
+                className={`font-display font-extrabold text-sm px-5 py-2 rounded-full transition shadow-md active:scale-[0.98] active:translate-y-[1.5px] ${
+                  scrolled 
+                    ? 'border-2 border-primary text-primary hover:bg-primary hover:text-white' 
+                    : 'border-2 border-white text-white hover:bg-white hover:text-primary-dark backdrop-blur-sm'
+                }`}
               >
                 Contacto
               </a>
@@ -235,7 +259,7 @@ function App() {
       {/* Hero Section */}
       <section 
         id="inicio" 
-        className="relative min-h-[90dvh] flex items-center overflow-hidden"
+        className="relative min-h-[100dvh] pt-20 pb-16 flex items-center overflow-hidden"
       >
         {/* Slides Background */}
         {slides.map((slide, idx) => (
@@ -248,91 +272,104 @@ function App() {
             <img
               src={slide.image}
               alt={slide.title}
-              className={`w-full h-full object-cover transition-transform duration-[6500ms] ease-out ${
+              className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-out ${
                 idx === currentSlide ? 'scale-105' : 'scale-100'
               }`}
             />
           </div>
         ))}
 
-        {/* Ambient Dark Overlay to ensure legibility */}
-        <div className="absolute inset-0 bg-[#07212b]/35 z-10" />
+        {/* Dynamic Gradient Scrim Overlays - Keeps image center/right vivid while securing text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30 z-10 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 flex justify-start my-12">
-          <div className="max-w-2xl backdrop-blur-xl bg-[#07212b]/60 border border-white/15 p-8 sm:p-12 rounded-3xl shadow-[0_30px_60px_-15px_rgba(7,33,43,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)]">
-            {/* Slide Text Content with dynamic key to trigger animation on change */}
-            <div key={currentSlide} className="animate-fade-in-up duration-500">
-              <span className="inline-flex items-center gap-1.5 text-white uppercase font-display font-extrabold text-[10px] sm:text-xs tracking-widest mb-4 bg-primary px-4 py-1.5 rounded-full max-w-max shadow-md border border-white/10">
+        {/* Hero Content - Clean Editorial Overlay Without Heavy Card */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 my-auto">
+          <div className="max-w-xl text-left" key={currentSlide}>
+            <div className="animate-fade-in-up duration-500">
+              {/* 1. Tag Eyebrow */}
+              <span className="inline-flex items-center gap-2 text-secondary-light uppercase font-display font-extrabold text-[11px] sm:text-xs tracking-widest mb-4 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-md">
                 {slides[currentSlide].tag}
               </span>
               
-              <img 
-                src={logoMainHero} 
-                alt="Molco Aventura" 
-                className="max-w-[150px] sm:max-w-[220px] w-full h-auto object-contain mb-6 drop-shadow-md" 
-              />
-              
-              <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-[1.1] tracking-tight drop-shadow-lg">
+              {/* 2. Headline */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-white leading-[1.08] tracking-tight drop-shadow-xl mb-4">
                 {slides[currentSlide].title}
               </h1>
               
-              <p className="text-white/90 text-sm sm:text-base font-medium mb-8 leading-relaxed max-w-xl">
+              {/* 3. Subtitle */}
+              <p className="text-white/85 text-sm sm:text-base font-normal leading-relaxed max-w-lg mb-8 drop-shadow">
                 {slides[currentSlide].subtitle}
               </p>
-            </div>
 
-            <div className="flex flex-wrap gap-4">
-              <a 
-                href="https://wa.me/56929471838" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center justify-center bg-secondary hover:bg-secondary-hover text-white font-display font-extrabold px-7 py-3.5 rounded-full shadow-lg shadow-secondary/30 hover:scale-[1.02] active:scale-[0.98] active:translate-y-[1px] transition-all duration-300"
-              >
-                <IconWhatsApp className="w-4 h-4 mr-2" />
-                Reserva tu Aventura
-              </a>
-              <a 
-                href="#itinerario" 
-                className="inline-flex items-center justify-center border-2 border-white/80 hover:border-white text-white font-display font-extrabold px-7 py-3.5 rounded-full hover:bg-white hover:text-primary-dark active:scale-[0.98] active:translate-y-[1px] transition-all duration-300"
-              >
-                Ver Itinerarios
-              </a>
+              {/* 4. Sleek Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <a 
+                  href="https://wa.me/56929471838" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center justify-center bg-secondary hover:bg-secondary-hover text-white font-display font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-full shadow-lg shadow-secondary/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300"
+                >
+                  <IconWhatsApp className="w-4 h-4 mr-2" />
+                  Reserva tu Aventura
+                </a>
+                <a 
+                  href="#itinerario" 
+                  className="inline-flex items-center justify-center border border-white/40 hover:border-white text-white font-display font-bold text-xs sm:text-sm px-6 py-3.5 rounded-full hover:bg-white/10 active:scale-95 transition-all duration-300 backdrop-blur-sm"
+                >
+                  Ver Itinerarios
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Navigation Arrows */}
-        <button 
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 hover:scale-105 active:scale-95 transition cursor-pointer"
-          aria-label="Diapositiva anterior"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-          </svg>
-        </button>
-        <button 
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 hover:scale-105 active:scale-95 transition cursor-pointer"
-          aria-label="Diapositiva siguiente"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-          </svg>
-        </button>
+        {/* Minimalist Bottom Navigation & Progress Dock */}
+        <div className="absolute bottom-6 left-4 right-4 sm:left-8 sm:right-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-4 pointer-events-none">
+          {/* Slide Indicator Dots & Labels */}
+          <div className="flex items-center gap-2 sm:gap-3 bg-black/40 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-full pointer-events-auto shadow-lg">
+            {slides.map((slide, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-display font-extrabold transition-all duration-300 cursor-pointer ${
+                  idx === currentSlide 
+                    ? 'bg-secondary text-white shadow-sm scale-105' 
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
+                }`}
+                aria-label={`Ir a diapositiva ${idx + 1}`}
+              >
+                <span>0{idx + 1}</span>
+                {idx === currentSlide && (
+                  <span className="hidden md:inline text-[10px] uppercase tracking-wider truncate max-w-[130px]">
+                    {slide.tag.split(' ')[1] || slide.tag}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
 
-        {/* Slide Indicators / Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2.5">
-          {slides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                idx === currentSlide ? 'bg-secondary w-7' : 'bg-white/40 hover:bg-white/70'
-              }`}
-              aria-label={`Ir a la diapositiva ${idx + 1}`}
-            />
-          ))}
+          {/* Controls */}
+          <div className="flex items-center gap-2 pointer-events-auto">
+            <button 
+              onClick={prevSlide}
+              className="p-2.5 sm:p-3 rounded-full bg-black/40 hover:bg-secondary text-white backdrop-blur-md border border-white/20 hover:border-white/40 active:scale-95 transition-all shadow-lg cursor-pointer"
+              aria-label="Diapositiva anterior"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="p-2.5 sm:p-3 rounded-full bg-black/40 hover:bg-secondary text-white backdrop-blur-md border border-white/20 hover:border-white/40 active:scale-95 transition-all shadow-lg cursor-pointer"
+              aria-label="Diapositiva siguiente"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 

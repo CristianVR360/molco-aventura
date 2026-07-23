@@ -70,6 +70,10 @@
     color: var(--text-main);
     transition: background-color 0.5s ease, color 0.5s ease;
   }
+
+  p {
+    text-align: justify;
+  }
 }
 
 /* Premium noise overlay for texture */
@@ -126,10 +130,6 @@
 }
 
 /* Custom premium hover underline */
-.hover-underline-expand {
-  position: relative;
-}
-
 .hover-underline-expand::after {
   content: '';
   position: absolute;
@@ -138,7 +138,7 @@
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: var(--primary);
+  background-color: currentColor;
   transform-origin: bottom right;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
