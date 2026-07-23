@@ -79,7 +79,6 @@ function App() {
   }, []);
 
   const logoHeader = scrolled ? logoHorizontalColor : logoHorizontalWhite;
-  const logoMainHero = logoHorizontalWhite;
   const logoFooter = logoHorizontalWhite;
 
   const slides = [
@@ -842,7 +841,7 @@ function App() {
             {
               title: 'Centros de Esquí',
               tag: 'Nieve & Cordillera',
-              desc: 'Pillán, Corralco o Nevados de Chillán. Visita las mejores pistas cordilleranas en invierno y disfruta de deportes de nieve y vistas panorámicas de eseño.',
+              desc: 'Pillán, Corralco, Nevados de Chillán o Valle Nevado en la Región Metropolitana. Visita las mejores pistas cordilleranas en invierno y disfruta de deportes de nieve y vistas panorámicas de ensueño.',
               image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=800&auto=format&fit=crop',
               link: 'https://wa.me/56929471838?text=Hola,%20me%20gustaria%20saber%20mas%20sobre%20los%20Centros%20de%20Esqui'
             }
