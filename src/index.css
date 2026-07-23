@@ -11,49 +11,109 @@
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-light: var(--secondary-light);
   --color-secondary-dark: var(--secondary-dark);
+
+  --color-bg-site: var(--bg-site);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
 }
 
 :root, .theme-a {
-  --primary: #123c49;
-  --primary-hover: #0e303b;
-  --primary-light: #f0f5f7;
-  --primary-medium: #cce0e6;
-  --primary-dark: #0a2128;
+  --primary: #114c5f;
+  --primary-hover: #093444;
+  --primary-light: #f1f6f8;
+  --primary-medium: #b6ccd4;
+  --primary-dark: #07212b;
   
-  --secondary: #b3bc40;
-  --secondary-hover: #9ca337;
-  --secondary-light: #f7f9e8;
-  --secondary-dark: #828a2f;
+  --secondary: #9ea925;
+  --secondary-hover: #88921d;
+  --secondary-light: #f9faec;
+  --secondary-dark: #666e13;
+
+  --bg-site: #fdfdfc;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(17, 76, 95, 0.08);
+  --text-main: #07212b;
+  --text-muted: #4e656f;
 }
 
 .theme-b {
-  --primary: #2b6dbc;
-  --primary-hover: #215594;
-  --primary-light: #f0f5fb;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --primary-light: #f0f5ff;
   --primary-medium: #cbdff7;
-  --primary-dark: #194070;
+  --primary-dark: #1e3a8a;
   
-  --secondary: #4d7c3e;
-  --secondary-hover: #3d6231;
-  --secondary-light: #f0f7ef;
-  --secondary-dark: #2f4c26;
+  --secondary: #16a34a;
+  --secondary-hover: #15803d;
+  --secondary-light: #f0fdf4;
+  --secondary-dark: #166534;
+
+  --bg-site: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(29, 78, 216, 0.08);
+  --text-main: #0f1e32;
+  --text-muted: #4a5b70;
 }
 
 @layer base {
-  :root {
-    --font-display: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
-  }
-  
   html {
     scroll-behavior: smooth;
   }
+  
+  body {
+    background-color: var(--bg-site);
+    color: var(--text-main);
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+}
+
+/* Premium noise overlay for texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.015;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Smooth fade-in reveals */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glassmorphism custom enhancements */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--card-border);
+}
+
+/* Subtle spotlight radial highlight */
+.radial-glow {
+  background: radial-gradient(circle at top left, var(--primary-light) 0%, transparent 60%);
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -64,5 +124,29 @@
 .animate-fade-in-up {
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Custom premium hover underline */
+.hover-underline-expand {
+  position: relative;
+}
+
+.hover-underline-expand::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-underline-expand:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 
 
