@@ -13,6 +13,7 @@ import fotoTermas from './assets/fotos/termas-huife.jpg';
 // Helper Components
 import ScrollReveal from './components/ScrollReveal';
 import CookieConsent from './components/CookieConsent';
+import NotFound from './components/NotFound';
 
 // New Logos Imports
 import logoHorizontalColor from './assets/logos/SVG/logo horizontal fc.svg';
@@ -46,6 +47,8 @@ const IconWhatsApp = ({ className }) => (
 );
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved === 'theme-b' ? 'theme-b' : 'theme-a';
@@ -55,6 +58,14 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeTab, setActiveTab] = useState('dia2');
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     const body = document.body;
@@ -157,6 +168,19 @@ function App() {
     }
   };
 
+  const is404 = currentPath !== '/' && currentPath !== '' && currentPath !== '/index.html';
+
+  if (is404) {
+    return (
+      <NotFound 
+        onGoHome={(targetHash) => {
+          window.history.pushState({}, '', targetHash || '/');
+          setCurrentPath('/');
+        }} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-bg-site text-text-main font-sans antialiased selection:bg-primary selection:text-white relative">
       {/* Noise overlay texture */}
@@ -179,50 +203,10 @@ function App() {
             </a>
           </div>
           <div className="flex items-center gap-6">
-            {/* Story-driven Custom Identity Selector */}
-            <div className={`flex items-center rounded-full p-1 shadow-inner relative z-10 transition-colors duration-300 ${
-              scrolled 
-                ? 'bg-primary-light/60 border border-primary-medium/20' 
-                : 'bg-black/30 border border-white/20 backdrop-blur-md'
-            }`}>
-              <button 
-                onClick={() => setTheme('theme-a')} 
-                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-display font-extrabold transition-all duration-300 cursor-pointer ${
-                  theme === 'theme-a' 
-                    ? 'bg-primary text-white shadow-md scale-105' 
-                    : scrolled ? 'text-text-muted hover:text-primary' : 'text-white/80 hover:text-white'
-                }`}
-                title="Identidad A: Volcán & Bosque"
-              >
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l10 18H2L12 3z M12 3v6 M9 9h6" />
-                </svg>
-                <span className="hidden md:inline">Volcán & Bosque</span>
-                <span className="inline md:hidden">A</span>
-              </button>
-              <button 
-                onClick={() => setTheme('theme-b')} 
-                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-display font-extrabold transition-all duration-300 cursor-pointer ${
-                  theme === 'theme-b' 
-                    ? 'bg-primary text-white shadow-md scale-105' 
-                    : scrolled ? 'text-text-muted hover:text-primary' : 'text-white/80 hover:text-white'
-                }`}
-                title="Identidad B: Lagos & Ríos"
-              >
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12c.895 0 1.79.342 2.47 1.026a3.49 3.49 0 004.938 0 3.49 3.49 0 014.938 0 3.49 3.49 0 004.938 0 3.49 3.49 0 012.47-1.026" />
-                </svg>
-                <span className="hidden md:inline">Lagos & Ríos</span>
-                <span className="inline md:hidden">B</span>
-              </button>
-            </div>
-            
             <nav className="hidden lg:flex items-center gap-6">
               {[
                 { name: 'Inicio', href: '#inicio' },
-                { name: 'Conócenos', href: '#conocenos' },
                 { name: 'Servicios', href: '#servicios' },
-                { name: 'Itinerario', href: '#itinerario' },
                 { name: 'Tarifas', href: '#tarifas' },
                 { name: 'Actividades', href: '#actividades' },
               ].map((item) => (
@@ -323,31 +307,8 @@ function App() {
           </div>
         </div>
 
-        {/* Minimalist Bottom Navigation & Progress Dock */}
-        <div className="absolute bottom-6 left-4 right-4 sm:left-8 sm:right-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-4 pointer-events-none">
-          {/* Slide Indicator Dots & Labels */}
-          <div className="flex items-center gap-2 sm:gap-3 bg-black/40 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-full pointer-events-auto shadow-lg">
-            {slides.map((slide, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-display font-extrabold transition-all duration-300 cursor-pointer ${
-                  idx === currentSlide 
-                    ? 'bg-secondary text-white shadow-sm scale-105' 
-                    : 'text-white/60 hover:text-white hover:bg-white/10'
-                }`}
-                aria-label={`Ir a diapositiva ${idx + 1}`}
-              >
-                <span>0{idx + 1}</span>
-                {idx === currentSlide && (
-                  <span className="hidden md:inline text-[10px] uppercase tracking-wider truncate max-w-[130px]">
-                    {slide.tag.split(' ')[1] || slide.tag}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-
+        {/* Minimalist Bottom Navigation Controls */}
+        <div className="absolute bottom-6 right-4 sm:right-8 z-30 pointer-events-none">
           {/* Controls */}
           <div className="flex items-center gap-2 pointer-events-auto">
             <button 
