@@ -48,7 +48,16 @@ const IconWhatsApp = ({ className }) => (
 );
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const getRouteInfo = () => {
+    const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+    const hash = window.location.hash.toLowerCase();
+    const isBrand = path === '/marca' || path === '/logos' || path === '/brand' || 
+                    hash === '#marca' || hash === '#/marca' || hash === '#logos' || hash === '#brand';
+    const isHome = path === '/' || path === '/index.html' || path === '';
+    return { path, hash, isBrand, is404: !isBrand && !isHome };
+  };
+
+  const [routeInfo, setRouteInfo] = useState(getRouteInfo);
 
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -61,12 +70,26 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname);
+    const handleRouteChange = () => {
+      setRouteInfo(getRouteInfo());
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('hashchange', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('hashchange', handleRouteChange);
+    };
   }, []);
+
+  const navigateTo = (target) => {
+    if (target.startsWith('#')) {
+      window.location.hash = target;
+    } else {
+      window.history.pushState({}, '', target);
+    }
+    setRouteInfo(getRouteInfo());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const body = document.body;
@@ -169,16 +192,7 @@ function App() {
     }
   };
 
-  const isBrandPage = currentPath === '/marca' || currentPath === '/marca/' || currentPath === '/logos' || currentPath === '/brand';
-  const is404 = !isBrandPage && currentPath !== '/' && currentPath !== '' && currentPath !== '/index.html';
-
-  const navigateTo = (path) => {
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  if (isBrandPage) {
+  if (routeInfo.isBrand) {
     return (
       <BrandKit 
         onGoHome={(targetPath) => {
@@ -188,7 +202,7 @@ function App() {
     );
   }
 
-  if (is404) {
+  if (routeInfo.is404) {
     return (
       <NotFound 
         onGoHome={(targetHash) => {
