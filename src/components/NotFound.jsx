@@ -82,6 +82,7 @@ const NotFound = ({ onGoHome }) => {
               { name: 'Servicios', href: '/#servicios' },
               { name: 'Tarifas & Hospedaje', href: '/#tarifas' },
               { name: 'Actividades', href: '/#actividades' },
+              { name: 'Descargar Logos / Marca', href: '/marca' },
             ].map((link) => (
               <a
                 key={link.name}

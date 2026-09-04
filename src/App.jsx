@@ -14,6 +14,7 @@ import fotoTermas from './assets/fotos/termas-huife.jpg';
 import ScrollReveal from './components/ScrollReveal';
 import CookieConsent from './components/CookieConsent';
 import NotFound from './components/NotFound';
+import BrandKit from './components/BrandKit';
 
 // New Logos Imports
 import logoHorizontalColor from './assets/logos/SVG/logo horizontal fc.svg';
@@ -168,14 +169,30 @@ function App() {
     }
   };
 
-  const is404 = currentPath !== '/' && currentPath !== '' && currentPath !== '/index.html';
+  const isBrandPage = currentPath === '/marca' || currentPath === '/marca/' || currentPath === '/logos' || currentPath === '/brand';
+  const is404 = !isBrandPage && currentPath !== '/' && currentPath !== '' && currentPath !== '/index.html';
+
+  const navigateTo = (path) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (isBrandPage) {
+    return (
+      <BrandKit 
+        onGoHome={(targetPath) => {
+          navigateTo(targetPath || '/');
+        }} 
+      />
+    );
+  }
 
   if (is404) {
     return (
       <NotFound 
         onGoHome={(targetHash) => {
-          window.history.pushState({}, '', targetHash || '/');
-          setCurrentPath('/');
+          navigateTo(targetHash || '/');
         }} 
       />
     );
@@ -902,7 +919,13 @@ function App() {
 
           <div className="border-t border-white/10 pt-8 mt-12 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-sky-200/40">
             <p>&copy; {new Date().getFullYear()} Molco Aventura. Todos los derechos reservados. Diseñado para los amantes del sur de Chile.</p>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap gap-4 sm:gap-6 items-center">
+              <button 
+                onClick={() => navigateTo('/marca')} 
+                className="text-secondary hover:text-white transition font-bold cursor-pointer"
+              >
+                Descargar Logos / Marca
+              </button>
               <a href="#terminos" className="hover:text-white transition">Términos de Servicio</a>
               <a href="#privacidad" className="hover:text-white transition">Política de Privacidad</a>
             </div>
